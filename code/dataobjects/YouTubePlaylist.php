@@ -64,8 +64,17 @@ class YouTubePlaylist extends YouTubeDataObject
             $result->error('A Playlist URL is required');
         }
 
-        if (!$this->extractPlaylistID($this->YouTubeURL)) {
+        if (!$id =$this->extractPlaylistID($this->YouTubeURL)) {
             $result->error('The Playlist URL supplied doesn\'t seem to match the YouTube playlist url pattern.');
+        }
+
+        if ($playlist = YouTubePlaylist::get()->filter('PlaylistID', $id)->exclude('ID', $this->ID)->first()) {
+            $playlistLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$playlist->ID}/edit";
+            $result->error("A playlist with that YouTube ID already exists. <a href='{$playlistLink}'>{$playlist->Title}</a>");
+        }
+
+        if (!$this->getYouTubeClient()->getPlaylistById($id)) {
+            $result->error('The playlist cannot be processed from YouTube');
         }
 
         return $result;

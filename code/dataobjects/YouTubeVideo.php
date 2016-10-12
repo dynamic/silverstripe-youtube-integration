@@ -92,8 +92,17 @@ class YouTubeVideo extends YouTubeDataObject
             $result->error('A Video URL is required');
         }
 
-        if (!$this->extractVideoID($this->YouTubeURL)) {
+        if (!$id = $this->extractVideoID($this->YouTubeURL)) {
             $result->error('The Video URL supplied doesn\'t seem to match the YouTube video url pattern.');
+        }
+
+        if ($video = YouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
+            $videoLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$video->ID}/edit";
+            $result->error("A video with that YouTube ID already exists. <a href='{$videoLink}'>{$video->Title}</a>");
+        }
+
+        if (!$this->getYouTubeClient()->getVideoInfo($id)) {
+            $result->error('The video cannot be processed from YouTube');
         }
 
         return $result;

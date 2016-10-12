@@ -103,7 +103,6 @@ class YouTubePlaylist extends YouTubeDataObject
     {
         return $this->customise([
             'PlaylistID' => $this->PlaylistID,
-            'Likes' => $this->getLikes(),
         ])->renderWith('PlaylistEmbedCode');
     }
 

@@ -12,7 +12,7 @@ class YouTubeAdmin extends ModelAdmin
      * @var array
      */
     private static $managed_models = [
-        'YouTubeVideo' => [
+        'SilverStripeYouTubeVideo' => [
             'title' => 'YouTube Videos',
         ],
         'YouTubePlaylist' => [

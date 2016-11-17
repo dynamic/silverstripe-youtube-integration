@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class YouTubeVideoManager
+ *
+ * @method Videos[]|ManyManyList $Videos
+ */
 class YouTubeVideoManager extends DataExtension
 {
 

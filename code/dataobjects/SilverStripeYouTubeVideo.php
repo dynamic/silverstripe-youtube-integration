@@ -34,7 +34,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
      * @var array
      */
     private static $belongs_many_many = [
-        'Playlists' => 'SilverStripeYouTubeVideoPlaylist',
+        'Playlists' => 'YouTubeVideoPlaylist',
     ];
 
     /**

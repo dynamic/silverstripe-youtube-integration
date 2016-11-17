@@ -7,7 +7,7 @@ class YouTubeVideoManager extends DataExtension
      * @var array
      */
     private static $many_many = [
-        'Videos' => 'YouTubeVideo',
+        'Videos' => 'SilverStripeYouTubeVideo',
     ];
 
     /**

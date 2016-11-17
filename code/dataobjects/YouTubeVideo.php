@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Class YouTubeVideo
+ * Class SilverStripeSilverStripeYouTubeVideo
  *
  * @property string $Title
  * @property string $YouTubeURL
  * @property string $VideoID
  */
-class YouTubeVideo extends YouTubeDataObject
+class SilverStripeYouTubeVideo extends YouTubeDataObject
 {
 
     /**
@@ -34,7 +34,7 @@ class YouTubeVideo extends YouTubeDataObject
      * @var array
      */
     private static $belongs_many_many = [
-        'Playlists' => 'YouTubeVideoPlaylist',
+        'Playlists' => 'SilverStripeYouTubeVideoPlaylist',
     ];
 
     /**
@@ -107,8 +107,8 @@ class YouTubeVideo extends YouTubeDataObject
             $result->error('The Video URL supplied doesn\'t seem to match the YouTube video url pattern.');
         }
 
-        if ($video = YouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
-            $videoLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$video->ID}/edit";
+        if ($video = SilverStripeYouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
+            $videoLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$video->ID}/edit";
             $result->error("A video with that YouTube ID already exists. <a href='{$videoLink}'>{$video->Title}</a>");
         }
 

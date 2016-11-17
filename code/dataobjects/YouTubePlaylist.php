@@ -69,7 +69,7 @@ class YouTubePlaylist extends YouTubeDataObject
         }
 
         if ($playlist = YouTubePlaylist::get()->filter('PlaylistID', $id)->exclude('ID', $this->ID)->first()) {
-            $playlistLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$playlist->ID}/edit";
+            $playlistLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$playlist->ID}/edit";
             $result->error("A playlist with that YouTube ID already exists. <a href='{$playlistLink}'>{$playlist->Title}</a>");
         }
 

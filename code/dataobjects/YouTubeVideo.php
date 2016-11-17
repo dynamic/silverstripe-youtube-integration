@@ -185,7 +185,7 @@ class YouTubeVideo extends YouTubeDataObject
      */
     public function getVideoCMSPreview()
     {
-        return $this->getYouTubeData()->DataValue('player.embedHtml');
+        return $this->DataValue('player.embedHtml');
     }
 
     /**

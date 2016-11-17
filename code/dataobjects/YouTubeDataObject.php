@@ -51,7 +51,10 @@ class YouTubeDataObject extends DataObject
      */
     public function setYouTubeClient()
     {
-        $this->youtube_client = new Youtube(['key' => Config::inst()->get('YouTubeDataObject', 'youtube_api_key')]);
+        $key = (defined('SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY'))
+            ? SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY
+            : Config::inst()->get('YouTubeDataObject', 'youtube_api_key');
+        $this->youtube_client = new Youtube(['key' => $key]);
         return $this;
     }
 

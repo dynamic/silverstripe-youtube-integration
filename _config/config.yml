@@ -1,6 +1,12 @@
 ---
 name: youtube-integration
 ---
+YouTubeIntegrationVideosPage:
+  extensions:
+    - YouTubeVideoManager
+YouTubeIntegrationPlaylistsPage:
+  extensions:
+    - CustomYouTubeVideoPlaylistManager
 YouTubeVideoPlaylist:
   extensions:
     - YouTubeVideoManager

@@ -64,7 +64,7 @@ class YouTubePlaylist extends YouTubeDataObject
             $result->error('A Playlist URL is required');
         }
 
-        if (!$id =$this->extractPlaylistID($this->YouTubeURL)) {
+        if (!$id = $this->extractPlaylistID($this->YouTubeURL)) {
             $result->error('The Playlist URL supplied doesn\'t seem to match the YouTube playlist url pattern.');
         }
 
@@ -120,10 +120,10 @@ class YouTubePlaylist extends YouTubeDataObject
      *
      * @return mixed
      */
-    public function getPlaylistData()
+    public function getYouTubeData()
     {
         if (!$this->playlist_data) {
-            $this->setPlaylistData();
+            $this->setYouTubeData();
         }
         return $this->playlist_data;
     }
@@ -133,10 +133,10 @@ class YouTubePlaylist extends YouTubeDataObject
      *
      * @return $this
      */
-    public function setPlaylistData()
+    public function setYouTubeData()
     {
-        $youtubeClient = $this->getYouTubeClient();
-        $this->playlist_data = $youtubeClient->getPlaylistById($this->PlaylistID);
+        $data = parent::getYouTubeData();
+        $this->playlist_data = array_merge(static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)), $data);
         return $this;
     }
 

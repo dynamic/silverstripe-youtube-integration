@@ -52,12 +52,23 @@ class YouTubeVideo extends YouTubeDataObject
      * @var
      */
     private $video_data;
+    /**
+     * @var int|bool
+     */
+    private $views;
 
     /**
      * @var array
      */
     private static $indexes = [
         'VideoID' => true,
+    ];
+
+    /**
+     * @var array
+     */
+    public static $allowed_actions = [
+        'VideoDataValue',
     ];
 
     /**
@@ -151,7 +162,7 @@ class YouTubeVideo extends YouTubeDataObject
      */
     public function setLikes()
     {
-        $this->likes = number_format($this->getVideoData()->statistics->likeCount);
+        $this->likes = $this->DataValue('statistics.likeCount');
         return $this;
     }
 
@@ -164,7 +175,6 @@ class YouTubeVideo extends YouTubeDataObject
     {
         return $this->customise([
             'VideoID' => $this->VideoID,
-            'Likes' => $this->getLikes(),
         ])->renderWith('EmbedCode');
     }
 
@@ -175,7 +185,7 @@ class YouTubeVideo extends YouTubeDataObject
      */
     public function getVideoCMSPreview()
     {
-        return $this->getVideoData()->player->embedHtml;
+        return $this->getYouTubeData()->DataValue('player.embedHtml');
     }
 
     /**
@@ -183,9 +193,10 @@ class YouTubeVideo extends YouTubeDataObject
      *
      * @return $this
      */
-    public function setVideoData()
+    public function setYouTubeData()
     {
-        $this->video_data = $this->getYouTubeClient()->getVideoInfo($this->VideoID);
+        $data = parent::getYouTubeData();
+        $this->video_data = array_merge(static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)), $data);
         return $this;
     }
 
@@ -194,12 +205,36 @@ class YouTubeVideo extends YouTubeDataObject
      *
      * @return mixed
      */
-    public function getVideoData()
+    public function getYouTubeData()
     {
         if (!$this->video_data) {
-            $this->setVideoData();
+            $this->setYouTubeData();
         }
         return $this->video_data;
+    }
+
+    /**
+     * Return this video's View count
+     *
+     * @return bool|int
+     */
+    public function getViews()
+    {
+        if (!$this->views) {
+            $this->setViews();
+        }
+        return $this->views;
+    }
+
+    /**
+     * Set this video's View count
+     *
+     * @return $this
+     */
+    public function setViews()
+    {
+        $this->views = $this->DataValue('statistics.viewCount');
+        return $this;
     }
 
 }

@@ -81,14 +81,22 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
 
         $value = $this->VideoID ? $this->VideoID : 'Video ID not available';
         $fields->replaceField('VideoID', ReadonlyField::create('VideoID')->setValue($value));
+        $fields->removeByName([
+            'Playlists',
+            'VideoPages',
+        ]);
 
-        if ($this->ID) {
-            $config = GridFieldConfig_RecordViewer::create();
-            $playlists = GridField::create('Playlists', 'Custom Playlists', $this->Playlists(), $config);
-            $fields->replaceField('Playlists', $playlists);
+        if ($this->ID > 0) {
+            $playlistConfig = GridFieldConfig_RecordViewer::create();
+            $playlists = GridField::create('Playlists', 'Custom Playlists', $this->Playlists(), $playlistConfig);
+            $fields->addFieldToTab('Root.Playlists', $playlists);
 
-            $fields->addFieldToTab('Root.Preview', LiteralField::create('video-preview', $this->getVideoCMSPreview()));
+            $pagesConfig = GridFieldConfig_RecordViewer::create();
+            $pages = GridField::create('VideoPages', 'Video Pages', $this->VideoPages(), $pagesConfig);
+            $fields->addFieldtoTab('Root.VideoPages', $pages);
         }
+
+        $this->extend('updateCMSFields', $fields);
 
         return $fields;
     }

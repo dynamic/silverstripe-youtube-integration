@@ -1,9 +1,14 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataExtension;
+
 /**
  * Class CustomYouTubeVideoPlaylistManager
+ * @package Dynamic\YouTubeIntegration\DataExtension
+ *
+ * @method CustomPlaylists[]|ManyManyList $CustomPlaylists
  */
-class CustomYouTubeVideoPlaylistManager extends DataExtension
+class CustomYouTubeVideoPlaylistManager extends \DataExtension
 {
 
     /**
@@ -28,20 +33,20 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
     private $playlists;
 
     /**
-     * @param FieldList $fields
+     * @param \FieldList $fields
      */
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(\FieldList $fields)
     {
 
         if (!$this->owner->ID) {
             $fields->removeByName('CustomPlaylists');
         } else {
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = \GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            $config->addComponent(new GridFieldAddExistingSearchButton());
-            $config->addComponent(new GridFieldOrderableRows());
+            $config->addComponent(new \GridFieldAddExistingSearchButton());
+            $config->addComponent(new \GridFieldOrderableRows());
 
-            $grid = GridField::create('CustomPlaylists', 'Custom Playlists', $this->owner->CustomPlaylists()->sort('Sort'), $config);
+            $grid = \GridField::create('CustomPlaylists', 'Custom Playlists', $this->owner->CustomPlaylists()->sort('Sort'), $config);
 
             if ($fields->dataFieldByName('CustomPlaylists')) {
                 $fields->replaceField('CustomPlaylists', $grid);

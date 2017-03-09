@@ -1,13 +1,16 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataObject;
+
 /**
- * Class SilverStripeSilverStripeYouTubeVideo
+ * Class SilverStripeYouTubeVideo
+ * @package Dynamic\YouTubeIntegration\DataObject
  *
  * @property string $Title
  * @property string $YouTubeURL
  * @property string $VideoID
  */
-class SilverStripeYouTubeVideo extends YouTubeDataObject
+class YouTubeVideo extends YouTubeDataObject
 {
 
     /**
@@ -73,26 +76,26 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     ];
 
     /**
-     * @return FieldList
+     * @return \FieldList
      */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
         $value = $this->VideoID ? $this->VideoID : 'Video ID not available';
-        $fields->replaceField('VideoID', ReadonlyField::create('VideoID')->setValue($value));
+        $fields->replaceField('VideoID', \ReadonlyField::create('VideoID')->setValue($value));
         $fields->removeByName([
             'Playlists',
             'VideoPages',
         ]);
 
         if ($this->ID > 0) {
-            $playlistConfig = GridFieldConfig_RecordViewer::create();
-            $playlists = GridField::create('Playlists', 'Custom Playlists', $this->Playlists(), $playlistConfig);
+            $playlistConfig = \GridFieldConfig_RecordViewer::create();
+            $playlists = \GridField::create('Playlists', 'Custom Playlists', $this->Playlists(), $playlistConfig);
             $fields->addFieldToTab('Root.Playlists', $playlists);
 
-            $pagesConfig = GridFieldConfig_RecordViewer::create();
-            $pages = GridField::create('VideoPages', 'Video Pages', $this->VideoPages(), $pagesConfig);
+            $pagesConfig = \GridFieldConfig_RecordViewer::create();
+            $pages = \GridField::create('VideoPages', 'Video Pages', $this->VideoPages(), $pagesConfig);
             $fields->addFieldtoTab('Root.VideoPages', $pages);
         }
 
@@ -102,7 +105,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     }
 
     /**
-     * @return ValidationResult
+     * @return \ValidationResult
      */
     public function validate()
     {
@@ -178,7 +181,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     /**
      * Return Video Embed code via a SilverStripe include
      *
-     * @return HTMLText
+     * @return \HTMLText
      */
     public function getEmbedCode()
     {

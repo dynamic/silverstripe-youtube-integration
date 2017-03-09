@@ -1,11 +1,14 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataExtension;
+
 /**
  * Class YouTubeVideoManager
+ * @package Dynamic\YouTubeIntegration\DataExtension
  *
  * @method Videos[]|ManyManyList $Videos
  */
-class YouTubeVideoManager extends DataExtension
+class YouTubeVideoManager extends \DataExtension
 {
 
     /**
@@ -39,20 +42,20 @@ class YouTubeVideoManager extends DataExtension
     /**
      * Update cms fields for the owner object to include video management fields
      *
-     * @param FieldList $fields
+     * @param \FieldList $fields
      */
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(\FieldList $fields)
     {
 
         if (!$this->owner->ID) {
             $fields->removeByName('Videos');
         } else {
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = \GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            $config->addComponent(new GridFieldAddExistingSearchButton());
-            $config->addComponent(new GridFieldOrderableRows());
+            $config->addComponent(new \GridFieldAddExistingSearchButton());
+            $config->addComponent(new \GridFieldOrderableRows());
 
-            $grid = GridField::create('Videos', 'Videos', $this->owner->Videos()->sort('Sort'), $config);
+            $grid = \GridField::create('Videos', 'Videos', $this->owner->Videos()->sort('Sort'), $config);
 
             if ($fields->dataFieldByName('Videos')) {
                 $fields->replaceField('Videos', $grid);

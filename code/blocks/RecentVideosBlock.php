@@ -1,9 +1,16 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataObject;
+
+use \Block;
+use Dynamic\YouTubeIntegration\Page\YouTubeIntegrationVideosPage;
+use Dynamic\YouTubeIntegration\DataObject\YouTubeVideo;
+
 if (class_exists('Block')) {
 
     /**
      * Class RecentVideosBlock
+     * @package Dynamic\YouTubeIntegration\DataObject
      *
      * @property int $Limit
      * @property int $VideoPageID
@@ -55,12 +62,12 @@ if (class_exists('Block')) {
             $fields = singleton('Block')->getCMSFields();
 
             $fields->addFieldsToTab('Root.Main', array(
-                NumericField::create('Limit'),
+                \NumericField::create('Limit'),
             ));
 
             $fields->addFieldToTab(
                 'Root.Main',
-                DropdownField::create('VideoPageID', 'Featured Video Page', YouTubeIntegrationVideosPage::get()->map())
+                \DropdownField::create('VideoPageID', 'Featured Video Page', YouTubeIntegrationVideosPage::get()->map())
                     ->setEmptyString('')
             );
 
@@ -85,7 +92,7 @@ if (class_exists('Block')) {
         {
             $this->recent_videos = ($this->VideoPageID != 0)
                 ? $this->VideoPage()->getVideosList()->limit($this->Limit)
-                : SilverStripeYouTubeVideo::get()->limit($this->Limit);
+                : YouTubeVideo::get()->limit($this->Limit);
             return $this;
         }
     }

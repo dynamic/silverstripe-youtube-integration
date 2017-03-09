@@ -9,7 +9,7 @@ if (class_exists('Block')) {
          */
         public function testGetCMSFields()
         {
-            $object = singleton('VideoBlock');
+            $object = singleton('Dynamic\YouTubeIntegrations\Block\VideoBlock');
             $fields = $object->getCMSFields();
             $this->assertInstanceOf('FieldList', $fields);
             $this->assertNotNull($fields->dataFieldByName('VideoID'));

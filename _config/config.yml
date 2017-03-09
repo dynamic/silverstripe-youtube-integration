@@ -1,12 +1,12 @@
 ---
 name: youtube-integration
 ---
-YouTubeIntegrationVideosPage:
+Dynamic\YouTubeIntegration\Page\YouTubeIntegrationVideosPage:
   extensions:
-    - YouTubeVideoManager
-YouTubeIntegrationPlaylistsPage:
+    - Dynamic\YouTubeIntegration\DataExtension\YouTubeVideoManager
+Dynamic\YouTubeIntegration\Page\YouTubeIntegrationPlaylistsPage:
   extensions:
-    - CustomYouTubeVideoPlaylistManager
-YouTubeVideoPlaylist:
+    - Dynamic\YouTubeIntegration\DataExtension\CustomYouTubeVideoPlaylistManager
+Dynamic\YouTubeIntegration\DataObject\YouTubeVideoPlaylist:
   extensions:
-    - YouTubeVideoManager
+    - Dynamic\YouTubeIntegration\DataExtension\YouTubeVideoManager

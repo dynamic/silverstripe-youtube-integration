@@ -1,9 +1,12 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Page;
+
 /**
  * Class YouTubeIntegrationPlaylistsPage
+ * @package Dynamic\YouTubeIntegration\Page
  */
-class YouTubeIntegrationPlaylistsPage extends Page
+class YouTubeIntegrationPlaylistsPage extends \Page
 {
 
     /**
@@ -19,8 +22,9 @@ class YouTubeIntegrationPlaylistsPage extends Page
 
 /**
  * Class YouTubeIntegrationPlaylistsPage_Controller
+ * @package Dynamic\YouTubeIntegration\Page
  */
-class YouTubeIntegrationPlaylistsPage_Controller extends Page_Controller
+class YouTubeIntegrationPlaylistsPage_Controller extends \Page_Controller
 {
 
 }

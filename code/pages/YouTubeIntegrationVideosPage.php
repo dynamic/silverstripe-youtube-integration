@@ -1,9 +1,12 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Page;
+
 /**
  * Class YouTubeIntegrationVideosPage
+ * @package Dynamic\YouTubeIntegration\Page
  */
-class YouTubeIntegrationVideosPage extends Page
+class YouTubeIntegrationVideosPage extends \Page
 {
 
     /**
@@ -19,8 +22,9 @@ class YouTubeIntegrationVideosPage extends Page
 
 /**
  * Class YouTubeIntegrationVideosPage_Controller
+ * @package Dynamic\YouTubeIntegration\Page
  */
-class YouTubeIntegrationVideosPage_Controller extends Page_Controller
+class YouTubeIntegrationVideosPage_Controller extends \Page_Controller
 {
 
 }

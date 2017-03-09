@@ -1,11 +1,14 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataObject;
+
 use Madcoda\Youtube;
 
 /**
  * Class YouTubeDataObject
+ * @package Dynamic\YouTubeIntegration\DataObject
  */
-class YouTubeDataObject extends DataObject
+class YouTubeDataObject extends \DataObject
 {
 
     /**
@@ -53,7 +56,7 @@ class YouTubeDataObject extends DataObject
     {
         $key = (defined('SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY'))
             ? SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY
-            : Config::inst()->get('YouTubeDataObject', 'youtube_api_key');
+            : \Config::inst()->get('YouTubeDataObject', 'youtube_api_key');
         $this->youtube_client = new Youtube(['key' => $key]);
         return $this;
     }
@@ -65,8 +68,8 @@ class YouTubeDataObject extends DataObject
      */
     protected function logError($message)
     {
-        if (Director::isLive()) {
-            SS_Log::log($message, SS_Log::ERR);
+        if (\Director::isLive()) {
+            \SS_Log::log($message, \SS_Log::ERR);
         } else {
             trigger_error($message, E_USER_ERROR);
         }

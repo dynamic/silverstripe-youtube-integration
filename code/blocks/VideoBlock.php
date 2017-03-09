@@ -1,7 +1,18 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Block;
+
+use \Block;
+use Dynamic\YouTubeIntegration\DataObject\YouTubeVideo;
+
 if (class_exists('Block')) {
 
+    /**
+     * Class VideoBlock
+     * @package Dynamic\YouTubeIntegration\Block
+     *
+     * @property int $VideoID
+     */
     class VideoBlock extends Block
     {
         /**
@@ -22,24 +33,24 @@ if (class_exists('Block')) {
         );
 
         /**
-         * @return FieldList
+         * @return \FieldList
          */
         public function getCMSFields()
         {
             $fields = parent::getCMSFields();
 
             $source = function(){
-                return SilverStripeYouTubeVideo::get()->map()->toArray();
+                return YouTubeVideo::get()->map()->toArray();
             };
 
 
             $fields->addFieldToTab(
                 'Root.Main',
-                DropdownField::create('VideoID')
+                \DropdownField::create('VideoID')
                     ->setTitle('Video')
                     ->setSource($source())
                     ->setEmptyString('')
-                    ->useAddNew('SilverStripeYouTubeVideo', $source)
+                    ->useAddNew('YouTubeVideo', $source)
             );
 
             return $fields;

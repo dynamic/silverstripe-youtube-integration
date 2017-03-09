@@ -23,6 +23,6 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-clover coverage.clover youtube-integration/tests
   - wget https://scrutinizer-ci.com/ocular.phar
-#  - git remote rm origin
-#  - git remote add origin git@github.com:muskie9/silverstripe-youtube-integration.git
-#  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - git remote rm origin
+  - git remote add origin git@github.com:dynamic/silverstripe-youtube-integration.git
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

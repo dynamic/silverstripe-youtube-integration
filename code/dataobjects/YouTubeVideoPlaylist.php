@@ -1,12 +1,15 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataObject;
+
 /**
  * Class YouTubeVideoPlaylist
+ * @package Dynamic\YouTubeIntegration\DataObject
  *
  * @property string $Title
  * @method ManyManyList $Videos
  */
-class YouTubeVideoPlaylist extends DataObject
+class YouTubeVideoPlaylist extends \DataObject
 {
 
     /**
@@ -40,7 +43,7 @@ class YouTubeVideoPlaylist extends DataObject
     /**
      * Validate that all requirements are met before writing to the database
      *
-     * @return ValidationResult
+     * @return \ValidationResult
      */
     public function validate()
     {

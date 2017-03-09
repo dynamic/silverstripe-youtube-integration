@@ -13,7 +13,7 @@ class YouTubeDataObjectTest extends SapphireTest
     {
         parent::setUp();
 
-        Config::inst()->update('YouTubeDataObject', 'youtube_api_key', 'AIzaSyB2rFhOGD-k52MYJpLe4MogVQGgopZw0GU');
+        Config::inst()->update('Dynamic\YouTubeIntegration\DataObject\YouTubeDataObject', 'youtube_api_key', 'AIzaSyB2rFhOGD-k52MYJpLe4MogVQGgopZw0GU');
     }
 
     /**
@@ -41,7 +41,7 @@ class YouTubeDataObjectTest extends SapphireTest
 /**
  * Class TestYouTubeDataObject
  */
-class TestYouTubeDataObject extends YouTubeDataObject
+class TestYouTubeDataObject extends Dynamic\YouTubeIntegration\DataObject\YouTubeDataObject
 {
     /**
      * @var array

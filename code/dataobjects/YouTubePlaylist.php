@@ -1,7 +1,10 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\DataObject;
+
 /**
  * Class YouTubePlaylist
+ * @package Dynamic\YouTubeIntegration\DataObject
  *
  * @property string $Title
  * @property string $YouTubeURL
@@ -41,20 +44,20 @@ class YouTubePlaylist extends YouTubeDataObject
     private $videos;
 
     /**
-     * @return FieldList
+     * @return \FieldList
      */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
         $value = ($this->PlaylistID) ? $this->PlaylistID : 'Playlist ID not avalaible at this time';
-        $fields->replaceField('PlaylistID', ReadonlyField::create('PlaylistID')->setValue($value));
+        $fields->replaceField('PlaylistID', \ReadonlyField::create('PlaylistID')->setValue($value));
 
         return $fields;
     }
 
     /**
-     * @return ValidationResult
+     * @return \ValidationResult
      */
     public function validate()
     {
@@ -106,7 +109,7 @@ class YouTubePlaylist extends YouTubeDataObject
     /**
      * Return Playlist Embed code via a SilverStripe include
      *
-     * @return HTMLText
+     * @return \HTMLText
      */
     public function getEmbedCode()
     {

@@ -1,9 +1,12 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Admin;
+
 /**
  * Class YouTubeAdmin
+ * @package Dynamic\YouTubeIntegration\Admin
  */
-class YouTubeAdmin extends ModelAdmin
+class YouTubeAdmin extends \ModelAdmin
 {
 
     /**
@@ -12,13 +15,13 @@ class YouTubeAdmin extends ModelAdmin
      * @var array
      */
     private static $managed_models = [
-        'SilverStripeYouTubeVideo' => [
+        'Dynamic\YouTubeIntegration\DataObject\YouTubeVideo' => [
             'title' => 'YouTube Videos',
         ],
-        'YouTubePlaylist' => [
+        'Dynamic\YouTubeIntegration\DataObject\YouTubePlaylist' => [
             'title' => 'YouTube Playlists',
         ],
-        'YouTubeVideoPlaylist' => [
+        'Dynamic\YouTubeIntegration\DataObject\YouTubeVideoPlaylist' => [
             'title' => 'Custom YouTube Video Playlists',
         ]
     ];

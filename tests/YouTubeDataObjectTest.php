@@ -32,7 +32,7 @@ class YouTubeDataObjectTest extends SapphireTest
         $object = TestYouTubeDataObject::create();
         $object->write();
         $this->assertNotNull($object->getYouTubeClient());
-        $this->assertInstanceOf('\Madcoda\Youtube', $object->getYouTubeClient());
+        $this->assertInstanceOf('\Madcoda\Youtube\Youtube', $object->getYouTubeClient());
 
     }
 

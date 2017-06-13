@@ -1,6 +1,6 @@
 <?php
 
-use Madcoda\Youtube;
+use Madcoda\Youtube\Youtube;
 
 /**
  * Class YouTubeDataObject

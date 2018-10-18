@@ -82,6 +82,11 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
         $value = $this->VideoID ? $this->VideoID : 'Video ID not available';
         $fields->replaceField('VideoID', ReadonlyField::create('VideoID')->setValue($value));
 
+        $fields->removeByName([
+            'Playlists',
+            'VideoPages',
+        ]);
+
         $this->extend('updateCMSFields', $fields);
 
         return $fields;

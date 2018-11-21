@@ -24,6 +24,10 @@
         "symbiote/silverstripe-gridfieldextensions": "^3.2",
         "silverstripe/recipe-cms": "^4.2@RC"
     },
+    "require-dev": {
+        "phpunit/PHPUnit": "^5.7",
+        "squizlabs/php_codesniffer": "*"
+    },
     "extra": {
         "installer-name": "silverstripe-youtube-integration",
         "branch-alias": {

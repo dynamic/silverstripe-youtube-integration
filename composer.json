@@ -31,8 +31,14 @@
         },
         "config": {
             "process-timeout": 600
-        },
-        "minimum-stability": "dev",
-        "prefer-stable": true
-    }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Dynamic\\YoutubeIntegration\\": "src/",
+            "Dynamic\\YoutubeIntegration\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

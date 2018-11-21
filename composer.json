@@ -35,8 +35,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Dynamic\\YoutubeIntegration\\": "src/",
-            "Dynamic\\YoutubeIntegration\\Tests\\": "tests/"
+            "Dynamic\\YouTubeIntegration\\": "src/",
+            "Dynamic\\YouTubeIntegration\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

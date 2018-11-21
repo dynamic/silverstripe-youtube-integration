@@ -14,7 +14,6 @@ use Dynamic\YouTubeIntegration\Page\VideosPage;
  */
 class YouTubeVideo extends YouTubeDataObject
 {
-
     /**
      * @var string
      */
@@ -47,7 +46,7 @@ class YouTubeVideo extends YouTubeDataObject
      */
     private static $belongs_many_many = [
         'Playlists' => YouTubeVideoPlaylist::class,
-        'VideoPages' => YouTubeIntegrationVideosPage::class,
+        'VideoPages' => VideosPage::class,
     ];
 
     /**
@@ -76,7 +75,10 @@ class YouTubeVideo extends YouTubeDataObject
      * @var array
      */
     private static $indexes = [
-        'VideoID' => true,
+        'youtube-integration-video' => [
+            'type' => 'unique',
+            'columns' => ['VideoID'],
+        ],
     ];
 
     /**
@@ -107,27 +109,34 @@ class YouTubeVideo extends YouTubeDataObject
     }
 
     /**
-     * @return ValidationResult
+     * @return \SilverStripe\ORM\ValidationResult
      */
     public function validate()
     {
         $result = parent::validate();
 
         if (!$this->YouTubeURL) {
-            $result->error('A Video URL is required');
+            $result->addFieldMessage('YouTubeURL', 'A Video URL is required');
         }
 
         if (!$id = $this->extractVideoID($this->YouTubeURL)) {
-            $result->error('The Video URL supplied doesn\'t seem to match the YouTube video url pattern.');
+            $result->addFieldMessage(
+                'YouTubeURL',
+                'The Video URL supplied doesn\'t seem to match the YouTube video url pattern.'
+            );
         }
 
         if ($video = YouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
             $videoLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$video->ID}/edit";
-            $result->error("A video with that YouTube ID already exists. <a href='{$videoLink}'>{$video->Title}</a>");
+
+            $result->addFieldMessage(
+                'YouTubeURL',
+                "A video with that YouTube ID already exists. <a href='{$videoLink}'>{$video->Title}</a>"
+            );
         }
 
         if (!$this->getYouTubeClient()->getVideoInfo($id)) {
-            $result->error('The video cannot be processed from YouTube');
+            $result->addError('The video cannot be processed from YouTube');
         }
 
         return $result;
@@ -213,8 +222,11 @@ class YouTubeVideo extends YouTubeDataObject
     public function setYouTubeData()
     {
         $data = parent::getYouTubeData();
-        $this->video_data = array_merge(static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)),
-            $data);
+        
+        $this->video_data = array_merge(
+            static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)),
+            $data
+        );
 
         return $this;
     }
@@ -258,5 +270,4 @@ class YouTubeVideo extends YouTubeDataObject
 
         return $this;
     }
-
 }

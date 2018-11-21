@@ -4,9 +4,14 @@ namespace Dynamic\YouTubeIntegration;
 
 use SilverStripe\Dev\SapphireTest;
 
-
+/**
+ *
+ */
 if (class_exists('Block')) {
-
+    /**
+     * Class VideoBlockTest
+     * @package Dynamic\YouTubeIntegration
+     */
     class VideoBlockTest extends SapphireTest
     {
         /**

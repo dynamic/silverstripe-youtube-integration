@@ -128,7 +128,7 @@ class YouTubeDataObject extends DataObject
     protected function formatData($data)
     {
         $isInt = ($data == preg_replace('/[^0-9]/', '', $data)) ? $data : false;
-        
+
         if ((array)$data === $data) {
             return null;
         } elseif ($isInt) {

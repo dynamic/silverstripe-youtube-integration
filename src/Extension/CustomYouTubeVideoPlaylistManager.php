@@ -50,8 +50,12 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
             $config->addComponent(new GridFieldAddExistingSearchButton());
             $config->addComponent(new GridFieldOrderableRows());
 
-            $grid = GridField::create('CustomPlaylists', 'Custom Playlists',
-                $this->owner->CustomPlaylists()->sort('Sort'), $config);
+            $grid = GridField::create(
+                'CustomPlaylists',
+                'Custom Playlists',
+                $this->owner->CustomPlaylists()->sort('Sort'),
+                $config
+            );
 
             if ($fields->dataFieldByName('CustomPlaylists')) {
                 $fields->replaceField('CustomPlaylists', $grid);

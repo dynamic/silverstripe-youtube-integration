@@ -13,7 +13,6 @@ use SilverStripe\Forms\ReadonlyField;
  */
 class YouTubePlaylist extends YouTubeDataObject
 {
-
     /**
      * @var string
      */
@@ -149,8 +148,11 @@ class YouTubePlaylist extends YouTubeDataObject
     public function setYouTubeData()
     {
         $data = parent::getYouTubeData();
-        $this->playlist_data = array_merge(static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)),
-            $data);
+        
+        $this->playlist_data = array_merge(
+            static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)),
+            $data
+        );
 
         return $this;
     }

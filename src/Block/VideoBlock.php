@@ -7,10 +7,7 @@ namespace Dynamic\YouTubeIntegration\Block;
 use DropdownField;
 use Dynamic\YouTubeIntegration\Model\SilverStripeYouTubeVideo;//*/
 
-
-
 if (class_exists('Block')) {
-
     class VideoBlock extends Block
     {
         /**
@@ -26,9 +23,9 @@ if (class_exists('Block')) {
         /**
          * @var array
          */
-        private static $has_one = array(
+        private static $has_one = [
             'Video' => SilverStripeYouTubeVideo::class,
-        );
+        ];
 
         /**
          * @return FieldList
@@ -37,10 +34,9 @@ if (class_exists('Block')) {
         {
             $fields = parent::getCMSFields();
 
-            $source = function(){
+            $source = function () {
                 return SilverStripeYouTubeVideo::get()->map()->toArray();
             };
-
 
             $fields->addFieldToTab(
                 'Root.Main',

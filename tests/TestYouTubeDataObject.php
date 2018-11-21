@@ -2,6 +2,8 @@
 
 namespace Dynamic\YouTubeIntegration\Tests;
 
+use Dynamic\YouTubeIntegration\Model\YouTubeDataObject;
+
 /**
  * Class TestYouTubeDataObject
  */

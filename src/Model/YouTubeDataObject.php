@@ -1,13 +1,18 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Model;
+
 use Madcoda\Youtube\Youtube;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Control\Director;
 
 /**
  * Class YouTubeDataObject
+ * @package Dynamic\YouTubeIntegration\Model
  */
 class YouTubeDataObject extends DataObject
 {
-
     /**
      * @var array
      */
@@ -15,6 +20,11 @@ class YouTubeDataObject extends DataObject
         'Title' => 'Varchar(255)',
         'YouTubeURL' => 'Varchar(255)',
     ];
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'YouTubeDataObject';
 
     /**
      * @var
@@ -41,6 +51,7 @@ class YouTubeDataObject extends DataObject
         if (!$this->youtube_client) {
             $this->setYouTubeClient();
         }
+
         return $this->youtube_client;
     }
 
@@ -53,8 +64,9 @@ class YouTubeDataObject extends DataObject
     {
         $key = (defined('SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY'))
             ? SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY
-            : Config::inst()->get('YouTubeDataObject', 'youtube_api_key');
+            : Config::inst()->get(YouTubeDataObject::class, 'youtube_api_key');
         $this->youtube_client = new Youtube(['key' => $key]);
+
         return $this;
     }
 
@@ -65,11 +77,11 @@ class YouTubeDataObject extends DataObject
      */
     protected function logError($message)
     {
-        if (Director::isLive()) {
-            SS_Log::log($message, SS_Log::ERR);
-        } else {
-            trigger_error($message, E_USER_ERROR);
-        }
+        //if (Director::isLive()) {
+        //    SS_Log::log($message, SS_Log::ERR);
+        //} else {
+        trigger_error($message, E_USER_ERROR);
+        //}
     }
 
     /**
@@ -82,6 +94,7 @@ class YouTubeDataObject extends DataObject
     {
         if ($key === null) {
             $this->logError("Video {$this->Title} is fetching null data. You must pass a string for a variable.");
+
             return null;
         }
         $dataArray = static::data_to_array($this->getYouTubeData());
@@ -115,6 +128,7 @@ class YouTubeDataObject extends DataObject
     protected function formatData($data)
     {
         $isInt = ($data == preg_replace('/[^0-9]/', '', $data)) ? $data : false;
+        
         if ((array)$data === $data) {
             return null;
         } elseif ($isInt) {
@@ -146,5 +160,4 @@ class YouTubeDataObject extends DataObject
     {
         return json_decode(json_encode($data), true);
     }
-
 }

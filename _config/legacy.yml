@@ -1,0 +1,10 @@
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    YouTubeIntegrationVideosPage: Dynamic\YouTubeIntegration\Page\VideosPage
+    YouTubeIntegrationPlaylistsPage: Dynamic\YouTubeIntegration\Page\VideoPlaylistsPage
+    SilverStripeYouTubeVideo: Dynamic\YouTubeIntegration\Model\YouTubeVideo
+    YouTubeVideoPlaylist: Dynamic\YouTubeIntegration\Model\YouTubeVideoPlaylist
+    YouTubeDataObject: Dynamic\YouTubeIntegration\Model\YouTubeDataObject
+    YouTubePlaylist: Dynamic\YouTubeIntegration\Model\YouTubePlaylist
+    #VideoBlock: Dynamic\YouTubeIntegration\Block\VideoBlock
+    #RecentVideosBlock: Dynamic\YouTubeIntegration\Block\RecentVideosBlock

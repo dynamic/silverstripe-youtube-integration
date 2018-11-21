@@ -1,5 +1,17 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Block;
+
+/*use Block;
+use NumericField;
+use DropdownField;
+
+
+use Dynamic\YouTubeIntegration\Page\YouTubeIntegrationVideosPage;
+use Dynamic\YouTubeIntegration\Model\SilverStripeYouTubeVideo;//*/
+
+
+
 if (class_exists('Block')) {
 
     /**
@@ -32,7 +44,7 @@ if (class_exists('Block')) {
          * @var array
          */
         private static $has_one = array(
-            'VideoPage' => 'YouTubeIntegrationVideosPage',
+            'VideoPage' => YouTubeIntegrationVideosPage::class,
         );
 
         /**

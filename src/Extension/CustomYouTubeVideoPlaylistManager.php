@@ -1,16 +1,26 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Extension;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField\GridField;
+use Dynamic\YouTubeIntegration\Model\YouTubeVideoPlaylist;
+
 /**
  * Class CustomYouTubeVideoPlaylistManager
+ * @package Dynamic\YouTubeIntegration\Extension
  */
 class CustomYouTubeVideoPlaylistManager extends DataExtension
 {
-
     /**
      * @var array
      */
     private static $many_many = [
-        'CustomPlaylists' => 'YouTubeVideoPlaylist',
+        'CustomPlaylists' => YouTubeVideoPlaylist::class,
     ];
 
     /**
@@ -32,7 +42,6 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-
         if (!$this->owner->ID) {
             $fields->removeByName('CustomPlaylists');
         } else {
@@ -41,7 +50,8 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
             $config->addComponent(new GridFieldAddExistingSearchButton());
             $config->addComponent(new GridFieldOrderableRows());
 
-            $grid = GridField::create('CustomPlaylists', 'Custom Playlists', $this->owner->CustomPlaylists()->sort('Sort'), $config);
+            $grid = GridField::create('CustomPlaylists', 'Custom Playlists',
+                $this->owner->CustomPlaylists()->sort('Sort'), $config);
 
             if ($fields->dataFieldByName('CustomPlaylists')) {
                 $fields->replaceField('CustomPlaylists', $grid);
@@ -49,7 +59,6 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
                 $fields->addFieldToTab('Root.CustomPlaylists', $grid);
             }
         }
-
     }
 
     /**
@@ -60,6 +69,7 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
         if (!$this->playlists) {
             $this->setCustomPlaylistSet();
         }
+
         return $this->playlists;
     }
 
@@ -69,7 +79,7 @@ class CustomYouTubeVideoPlaylistManager extends DataExtension
     public function setCustomPlaylistSet()
     {
         $this->playlists = $this->owner->CustomPlaylists()->sort('Sort');
+
         return $this;
     }
-
 }

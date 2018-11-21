@@ -1,5 +1,9 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Model;
+
+use SilverStripe\ORM\DataObject;
+
 /**
  * Class YouTubeVideoPlaylist
  *
@@ -8,15 +12,16 @@
  */
 class YouTubeVideoPlaylist extends DataObject
 {
-
     /**
      * @var string
      */
     private static $singular_name = 'YouTube Video Playlist';
+
     /**
      * @var string
      */
     private static $plural_name = 'YouTube Video Playlists';
+
     /**
      * @var string
      */
@@ -36,7 +41,6 @@ class YouTubeVideoPlaylist extends DataObject
         'Title' => 'Title',
     ];
 
-
     /**
      * Validate that all requirements are met before writing to the database
      *
@@ -52,5 +56,4 @@ class YouTubeVideoPlaylist extends DataObject
 
         return $result;
     }
-
 }

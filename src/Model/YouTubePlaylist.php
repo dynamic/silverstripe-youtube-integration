@@ -1,5 +1,9 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Model;
+
+use SilverStripe\Forms\ReadonlyField;
+
 /**
  * Class YouTubePlaylist
  *
@@ -14,14 +18,21 @@ class YouTubePlaylist extends YouTubeDataObject
      * @var string
      */
     private static $singular_name = 'YouTube Playlist';
+
     /**
      * @var string
      */
     private static $plural_name = 'YouTube Playlists';
+
     /**
      * @var string
      */
     private static $description = 'A playlist of videos hosted and managed on YouTube';
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'YouTubePlaylist';
 
     /**
      * @var array
@@ -100,6 +111,7 @@ class YouTubePlaylist extends YouTubeDataObject
     {
         $urlParts = parse_url($url);
         parse_str($urlParts['query'], $variables);
+
         return isset($variables['list']) ? $variables['list'] : false;
     }
 
@@ -125,6 +137,7 @@ class YouTubePlaylist extends YouTubeDataObject
         if (!$this->playlist_data) {
             $this->setYouTubeData();
         }
+
         return $this->playlist_data;
     }
 
@@ -136,7 +149,9 @@ class YouTubePlaylist extends YouTubeDataObject
     public function setYouTubeData()
     {
         $data = parent::getYouTubeData();
-        $this->playlist_data = array_merge(static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)), $data);
+        $this->playlist_data = array_merge(static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)),
+            $data);
+
         return $this;
     }
 
@@ -150,6 +165,7 @@ class YouTubePlaylist extends YouTubeDataObject
         if (!$this->videos) {
             $this->setVideos();
         }
+
         return $this->videos;
     }
 
@@ -161,7 +177,7 @@ class YouTubePlaylist extends YouTubeDataObject
     public function setVideos()
     {
         $this->videos = $this->getYouTubeClient()->getPlaylistItemsByPlaylistId($this->PlaylistID);
+
         return $this;
     }
-
 }

@@ -1,0 +1,12 @@
+mappings:
+  YouTubeIntegrationVideosPage: Dynamic\YouTubeIntegration\Page\VideosPage
+  YouTubeIntegrationPlaylistsPage: Dynamic\YouTubeIntegration\Page\VideoPlaylistsPage
+  YouTubeVideoManager: Dynamic\YouTubeIntegration\Extension\YouTubeVideoManager
+  CustomYouTubeVideoPlaylistManager: Dynamic\YouTubeIntegration\Extension\CustomYouTubeVideoPlaylistManager
+  YouTubeAdmin: Dynamic\YouTubeIntegration\Admin\YouTubeAdmin
+  SilverStripeYouTubeVideo: Dynamic\YouTubeIntegration\Model\SilverStripeYouTubeVideo
+  YouTubeVideoPlaylist: Dynamic\YouTubeIntegration\Model\YouTubeVideoPlaylist
+  YouTubeDataObject: Dynamic\YouTubeIntegration\Model\YouTubeDataObject
+  YouTubePlaylist: Dynamic\YouTubeIntegration\Model\YouTubePlaylist
+  VideoBlock: Dynamic\YouTubeIntegration\Block\VideoBlock
+  RecentVideosBlock: Dynamic\YouTubeIntegration\Block\RecentVideosBlock

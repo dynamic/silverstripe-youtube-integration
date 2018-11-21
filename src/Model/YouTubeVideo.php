@@ -1,27 +1,39 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Model;
+
+use SilverStripe\Forms\ReadonlyField;
+use Dynamic\YouTubeIntegration\Page\VideosPage;
+
 /**
- * Class SilverStripeSilverStripeYouTubeVideo
+ * Class YouTubeVideo
  *
  * @property string $Title
  * @property string $YouTubeURL
  * @property string $VideoID
  */
-class SilverStripeYouTubeVideo extends YouTubeDataObject
+class YouTubeVideo extends YouTubeDataObject
 {
 
     /**
      * @var string
      */
     private static $singular_name = 'YouTube Video';
+
     /**
      * @var string
      */
     private static $plural_name = 'YouTube Videos';
+
     /**
      * @var string
      */
     private static $description = 'A video from YouTube. The video can be a single video, or a video from a playlist.';
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'YouTubeVideo';
 
     /**
      * @var array
@@ -34,8 +46,8 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
      * @var array
      */
     private static $belongs_many_many = [
-        'Playlists' => 'YouTubeVideoPlaylist',
-        'VideoPages' => 'YouTubeIntegrationVideosPage',
+        'Playlists' => YouTubeVideoPlaylist::class,
+        'VideoPages' => YouTubeIntegrationVideosPage::class,
     ];
 
     /**
@@ -49,10 +61,12 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
      * @var int
      */
     private $likes;
+
     /**
      * @var
      */
     private $video_data;
+
     /**
      * @var int|bool
      */
@@ -107,7 +121,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
             $result->error('The Video URL supplied doesn\'t seem to match the YouTube video url pattern.');
         }
 
-        if ($video = SilverStripeYouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
+        if ($video = YouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
             $videoLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$video->ID}/edit";
             $result->error("A video with that YouTube ID already exists. <a href='{$videoLink}'>{$video->Title}</a>");
         }
@@ -139,6 +153,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     {
         $urlParts = parse_url($url);
         parse_str($urlParts['query'], $variables);
+
         return isset($variables['v']) ? $variables['v'] : false;
     }
 
@@ -152,6 +167,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
         if (!$this->likes) {
             $this->setLikes();
         }
+
         return $this->likes;
     }
 
@@ -163,6 +179,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     public function setLikes()
     {
         $this->likes = $this->DataValue('statistics.likeCount');
+
         return $this;
     }
 
@@ -198,6 +215,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
         $data = parent::getYouTubeData();
         $this->video_data = array_merge(static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)),
             $data);
+
         return $this;
     }
 
@@ -211,6 +229,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
         if (!$this->video_data) {
             $this->setYouTubeData();
         }
+
         return $this->video_data;
     }
 
@@ -224,6 +243,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
         if (!$this->views) {
             $this->setViews();
         }
+
         return $this->views;
     }
 
@@ -235,6 +255,7 @@ class SilverStripeYouTubeVideo extends YouTubeDataObject
     public function setViews()
     {
         $this->views = $this->DataValue('statistics.viewCount');
+
         return $this;
     }
 

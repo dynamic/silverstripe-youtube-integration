@@ -1,5 +1,14 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Block;
+
+/*use Block;
+
+use DropdownField;
+use Dynamic\YouTubeIntegration\Model\SilverStripeYouTubeVideo;//*/
+
+
+
 if (class_exists('Block')) {
 
     class VideoBlock extends Block
@@ -18,7 +27,7 @@ if (class_exists('Block')) {
          * @var array
          */
         private static $has_one = array(
-            'Video' => 'SilverStripeYouTubeVideo',
+            'Video' => SilverStripeYouTubeVideo::class,
         );
 
         /**
@@ -39,7 +48,7 @@ if (class_exists('Block')) {
                     ->setTitle('Video')
                     ->setSource($source())
                     ->setEmptyString('')
-                    ->useAddNew('SilverStripeYouTubeVideo', $source)
+                    ->useAddNew(SilverStripeYouTubeVideo::class, $source)
             );
 
             return $fields;

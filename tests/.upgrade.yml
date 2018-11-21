@@ -1,0 +1,4 @@
+mappings:
+  VideoBlockTest: Dynamic\YouTubeIntegration\VideoBlockTest
+  YouTubeDataObjectTest: Dynamic\YouTubeIntegration\YouTubeDataObjectTest
+  TestYouTubeDataObject: Dynamic\YouTubeIntegration\TestYouTubeDataObject

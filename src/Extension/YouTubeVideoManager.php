@@ -1,5 +1,16 @@
 <?php
 
+namespace Dynamic\YouTubeIntegration\Extension;
+
+use Dynamic\YouTubeIntegration\Model\YouTubeVideo;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\GridField;
+
 /**
  * Class YouTubeVideoManager
  *
@@ -7,12 +18,11 @@
  */
 class YouTubeVideoManager extends DataExtension
 {
-
     /**
      * @var array
      */
     private static $many_many = [
-        'Videos' => 'SilverStripeYouTubeVideo',
+        'Videos' => YouTubeVideo::class,
     ];
 
     /**
@@ -43,12 +53,11 @@ class YouTubeVideoManager extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-
         if (!$this->owner->ID) {
             $fields->removeByName('Videos');
         } else {
             $config = GridFieldConfig_RelationEditor::create();
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+            $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
             $config->addComponent(new GridFieldAddExistingSearchButton());
             $config->addComponent(new GridFieldOrderableRows());
 
@@ -59,9 +68,7 @@ class YouTubeVideoManager extends DataExtension
             } else {
                 $fields->addFieldToTab('Root.Videos', $grid);
             }
-
         }
-
     }
 
     /**
@@ -70,6 +77,7 @@ class YouTubeVideoManager extends DataExtension
     public function setVideosList()
     {
         $this->videos = $this->owner->Videos()->sort('Sort');
+
         return $this;
     }
 
@@ -81,7 +89,7 @@ class YouTubeVideoManager extends DataExtension
         if (!$this->videos) {
             $this->setVideosList();
         }
+
         return $this->videos;
     }
-
 }

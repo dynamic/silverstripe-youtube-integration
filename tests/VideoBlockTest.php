@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\YouTubeIntegration;
+namespace Dynamic\YouTubeIntegration\Tests;
 
 use SilverStripe\Dev\SapphireTest;
 

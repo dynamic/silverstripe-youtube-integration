@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\YouTubeIntegration;
+namespace Dynamic\YouTubeIntegration\Tests;
 
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\YouTubeIntegration\Model\YouTubeDataObject;
@@ -32,22 +32,4 @@ class YouTubeDataObjectTest extends SapphireTest
         $this->assertInstanceOf(Youtube::class, $object->getYouTubeClient());
         //*/
     }
-}
-
-/**
- * Class TestYouTubeDataObject
- */
-class TestYouTubeDataObject extends YouTubeDataObject implements TestOnly
-{
-    /**
-     * @var array
-     */
-    private static $db = [
-        'test' => 'Boolean',
-    ];
-
-    /**
-     * @var string
-     */
-    private static $table_name = "Test_TestYouTubeDataObject";
 }

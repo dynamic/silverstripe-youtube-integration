@@ -25,7 +25,8 @@ class YouTubeVideoPlaylist extends DataObject
     /**
      * @var string
      */
-    private static $description = 'Playlist built in SilverStripe comprised of individual YouTube videos. (Not a YouTube Playlist)';
+    private static $description = 'Playlist built in SilverStripe comprised of individual YouTube videos. 
+        (Not a YouTube Playlist)';
 
     /**
      * @var string

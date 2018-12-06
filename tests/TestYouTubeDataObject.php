@@ -3,6 +3,7 @@
 namespace Dynamic\YouTubeIntegration\Tests;
 
 use Dynamic\YouTubeIntegration\Model\YouTubeDataObject;
+use SilverStripe\Dev\TestOnly;
 
 /**
  * Class TestYouTubeDataObject

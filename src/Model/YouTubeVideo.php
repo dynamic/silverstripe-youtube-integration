@@ -127,7 +127,7 @@ class YouTubeVideo extends YouTubeDataObject
         }
 
         if ($video = YouTubeVideo::get()->filter('VideoID', $id)->exclude('ID', $this->ID)->first()) {
-            $videoLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$video->ID}/edit";
+            $videoLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$video->ID}/edit";
 
             $result->addFieldMessage(
                 'YouTubeURL',

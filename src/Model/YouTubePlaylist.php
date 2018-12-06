@@ -79,8 +79,9 @@ class YouTubePlaylist extends YouTubeDataObject
         }
 
         if ($playlist = YouTubePlaylist::get()->filter('PlaylistID', $id)->exclude('ID', $this->ID)->first()) {
-            $playlistLink = "/admin/youtube-admin/SilverStripeYouTubeVideo/EditForm/field/SilverStripeYouTubeVideo/item/{$playlist->ID}/edit";
-            $result->error("A playlist with that YouTube ID already exists. <a href='{$playlistLink}'>{$playlist->Title}</a>");
+            $playlistLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$playlist->ID}/edit";
+            $result->error("A playlist with that YouTube ID already exists. 
+                <a href='{$playlistLink}'>{$playlist->Title}</a>");
         }
 
         if (!$this->getYouTubeClient()->getPlaylistById($id)) {
@@ -101,7 +102,8 @@ class YouTubePlaylist extends YouTubeDataObject
     }
 
     /**
-     * Return the playlist ID if the supplied url has a matching pattern {@link https://linuxpanda.wordpress.com/2013/07/24/ultimate-best-regex-pattern-to-get-grab-parse-youtube-video-id-from-any-youtube-link-url/}
+     * Return the playlist ID if the supplied url has a matching pattern
+     * {@link https://linuxpanda.wordpress.com/2013/07/24/ultimate-best-regex-pattern-to-get-grab-parse-youtube-video-id-from-any-youtube-link-url/}
      *
      * @param string $url
      * @return bool

@@ -3,13 +3,13 @@
 namespace Dynamic\YouTubeIntegration\Extension;
 
 use Dynamic\YouTubeIntegration\Model\YouTubeVideo;
+use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\Forms\GridField;
 
 /**
  * Class YouTubeVideoManager

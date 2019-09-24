@@ -65,9 +65,17 @@ class YouTubeDataObject extends DataObject
         $key = (defined('SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY'))
             ? SILVERSTRIPE_YOUTUBE_INTEGRATION_KEY
             : Config::inst()->get(YouTubeDataObject::class, 'youtube_api_key');
-        $this->youtube_client = new Youtube(['key' => $key]);
+        $this->youtube_client = new Youtube(['key' => $key, 'referer' => $this->getReferrer()]);
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getReferrer()
+    {
+        return rtrim(preg_replace('/http(s|):\/\//', '', Director::absoluteBaseURL()), '/');
     }
 
     /**

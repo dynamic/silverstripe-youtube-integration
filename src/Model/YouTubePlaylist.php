@@ -80,12 +80,14 @@ class YouTubePlaylist extends YouTubeDataObject
 
         if ($playlist = YouTubePlaylist::get()->filter('PlaylistID', $id)->exclude('ID', $this->ID)->first()) {
             $playlistLink = "/admin/youtube-admin/YouTubeVideo/EditForm/field/YouTubeVideo/item/{$playlist->ID}/edit";
-            $result->error("A playlist with that YouTube ID already exists. 
+            $result->error("A playlist with that YouTube ID already exists.
                 <a href='{$playlistLink}'>{$playlist->Title}</a>");
         }
 
-        if (!$this->getYouTubeClient()->getPlaylistById($id)) {
-            $result->error('The playlist cannot be processed from YouTube');
+        if (YouTubeDataObject::config()->get('use_api')) {
+            if (!$this->getYouTubeClient()->getPlaylistById($id)) {
+                $result->error('The playlist cannot be processed from YouTube');
+            }
         }
 
         return $result;
@@ -149,12 +151,14 @@ class YouTubePlaylist extends YouTubeDataObject
      */
     public function setYouTubeData()
     {
-        $data = parent::getYouTubeData();
-        
-        $this->playlist_data = array_merge(
-            static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)),
-            $data
-        );
+        if (YouTubeDataObject::config()->get('use_api')) {
+            $data = parent::getYouTubeData();
+
+            $this->playlist_data = array_merge(
+                static::data_to_array($this->getYouTubeClient()->getPlaylistById($this->PlaylistID)),
+                $data
+            );
+        }
 
         return $this;
     }

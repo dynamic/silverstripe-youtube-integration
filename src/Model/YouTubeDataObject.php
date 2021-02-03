@@ -27,6 +27,11 @@ class YouTubeDataObject extends DataObject
     private static $table_name = 'YouTubeDataObject';
 
     /**
+     * @var bool
+     */
+    private static $use_api = true;
+
+    /**
      * @var
      */
     private $youtube_client;
@@ -100,13 +105,19 @@ class YouTubeDataObject extends DataObject
      */
     public function DataValue($key = null)
     {
+        if (!$this->config()->get('use_api')) {
+            return null;
+        }
+
         if ($key === null) {
             $this->logError("Video {$this->Title} is fetching null data. You must pass a string for a variable.");
 
             return null;
         }
+
         $dataArray = static::data_to_array($this->getYouTubeData());
         $keys = explode('.', $key);
+
         for ($i = 0; $i < count($keys); $i++) {
             if (isset($data)) {
                 if (isset($data[$keys[$i]])) {

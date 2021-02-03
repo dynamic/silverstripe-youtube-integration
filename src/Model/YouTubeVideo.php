@@ -135,8 +135,10 @@ class YouTubeVideo extends YouTubeDataObject
             );
         }
 
-        if (!$this->getYouTubeClient()->getVideoInfo($id)) {
-            $result->addError('The video cannot be processed from YouTube');
+        if (YouTubeDataObject::config()->get('use_api')) {
+            if (!$this->getYouTubeClient()->getVideoInfo($id)) {
+                $result->addError('The video cannot be processed from YouTube');
+            }
         }
 
         return $result;
@@ -221,12 +223,14 @@ class YouTubeVideo extends YouTubeDataObject
      */
     public function setYouTubeData()
     {
-        $data = parent::getYouTubeData();
-        
-        $this->video_data = array_merge(
-            static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)),
-            $data
-        );
+        if (YouTubeDataObject::config()->get('use_api')) {
+            $data = parent::getYouTubeData();
+
+            $this->video_data = array_merge(
+                static::data_to_array($this->getYouTubeClient()->getVideoInfo($this->VideoID)),
+                $data
+            );
+        }
 
         return $this;
     }
